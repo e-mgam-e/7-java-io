@@ -15,7 +15,18 @@ public class Task03Main {
     }
 
     public static String readAsString(InputStream inputStream, Charset charset) throws IOException {
-        // your implementation here
-        return "";
+        if (inputStream == null) {
+            throw new IllegalArgumentException("InputStream cannot be null");
+        }
+
+        byte[] buffer = new byte[1024];
+        StringBuilder stringBuilder = new StringBuilder();
+        int bytesRead;
+
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            stringBuilder.append(new String(buffer, 0, bytesRead, charset));
+        }
+
+        return stringBuilder.toString();
     }
 }
